@@ -10,10 +10,12 @@ public class ProcesamientoFicheroPlano  extends ProcesamientoFichero{
 
 	@Override
 	public ArrayList<Personaje> leerFichero(String ruta) {
+	if(existeFichero(ruta)==true) {
+			
+		}
+	return null;
 		
-		return null;
 	}
-
 	@Override
 	public void guardarFichero(List<Libro> listaLibros, String ruta) {
 		
