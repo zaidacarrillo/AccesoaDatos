@@ -2,12 +2,10 @@ package Modelo;
 
 public class Personaje {
 	private String nombre;
-	private String genero;
 	private String importancia;
 	
-	public Personaje(String nombre, String genero, String importancia) {
+	public Personaje(String nombre, String importancia) {
 		this.nombre =  nombre;
-		this.genero = genero;
 		this.importancia =  importancia;
 	}
 
@@ -17,14 +15,6 @@ public class Personaje {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public String getGenero() {
-		return genero;
-	}
-
-	public void setGenero(String genero) {
-		this.genero = genero;
 	}
 
 	public String getImportancia() {

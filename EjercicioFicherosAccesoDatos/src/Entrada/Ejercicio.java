@@ -25,11 +25,13 @@ public class Ejercicio {
 		
 		IProcesamientoFichero proc = new ProcesamientoFicheroPlano();
 		ArrayList <Personaje> personajesPrincipales =  new ArrayList<>();
+		personajesPrincipales.add(new Personaje ("Mildrelis","principal"));
+		personajesPrincipales.add(new Personaje ("Jerry","secundario"));
 		ArrayList<Libro> libros = new ArrayList <>();
 		libros.add(new Libro ("hola","planeta","autor",fecha,"accion", personajesPrincipales));
-		libros.add(new Libro ("hola","planeta","autor",fecha,"accion", personajesPrincipales));
+		libros.add(new Libro ("hola2","planeta2","autor2",fecha,"accion", personajesPrincipales));
 		System.out.println("Se guardará un fichero de texto PLANO.");
-		proc.guardarFichero(libros, "C:\\Users\\PC33\\Documents\\prueba");
+		proc.guardarFichero(libros, "C:\\Users\\PC33\\Documents\\prueba\\prueba.txt");
 		/*proc.leerFichero();*/
 		
 		

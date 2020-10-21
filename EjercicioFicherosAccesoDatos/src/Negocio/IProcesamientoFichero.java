@@ -6,7 +6,7 @@ import Modelo.Libro;
 
 public interface IProcesamientoFichero {
 	
-	public ArrayList<Personaje> leerFichero(String ruta);
+	public ArrayList<Libro> leerFichero(String ruta);
 
 	public void guardarFichero(List<Libro> listaLibros, String ruta);
 
