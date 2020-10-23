@@ -28,8 +28,8 @@ public class Ejercicio {
 		personajesPrincipales.add(new Personaje ("Mildrelis","principal"));
 		personajesPrincipales.add(new Personaje ("Jerry","secundario"));
 		ArrayList<Libro> libros = new ArrayList <>();
-		libros.add(new Libro ("hola","planeta","autor",fecha,"accion", personajesPrincipales));
-		libros.add(new Libro ("hola2","planeta2","autor2",fecha,"accion", personajesPrincipales));
+		libros.add(new Libro ("El planeta de los Simios","planeta","Carlos Martinez",fecha,"drama", personajesPrincipales));
+		libros.add(new Libro ("El principito","planeta2","Jesus Fernandez",fecha,"accion", personajesPrincipales));
 		System.out.println("Se guardará un fichero de texto PLANO.");
 		proc.guardarFichero(libros, "C:\\Users\\PC33\\Documents\\prueba\\prueba.txt");
 		/*proc.leerFichero();*/

@@ -1,9 +1,13 @@
 package Negocio;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +19,57 @@ public class ProcesamientoFicheroPlano extends ProcesamientoFichero {
 	@Override
 	public ArrayList<Libro> leerFichero(String ruta) {
 		if (existeFichero(ruta) == true) {
-			File fichero = new File(ruta);
-			
+			File fichero = null;
+		      FileReader fr = null;
+		      BufferedReader br = null;
 
-		}
+		      try {
+		        
+		         fichero = new File (ruta);
+		         fr = new FileReader (fichero);
+		         br = new BufferedReader(fr);
+		         String autor;
+		         String editorial;
+		        
+		         String linea;
+		         while((linea=br.readLine())!=null) {
+		        	 
+		        	 String[] divisionpuntoComaLibros = linea.split(";");
+		        	 
+		  /*      	 
+		        	 String personajes =  divisionpuntoComaLibros [5];
+		        	 String[] divisionGuionPersonajes = personajes.split("-");
+		        	 String divisionComa = divisionGuionPersonajes.toString();
+		        	 String [] divisionComaPersonajes = divisionComa.split(",");
+		        	 
+		        	 ArrayList datosPersonaje = new ArrayList ();
+		        	 datosPersonaje.add (autor = divisionpuntoComaLibros[0]);
+		        	 datosPersonaje.add (editorial = divisionpuntoComaLibros[1]);
+		        	 datosPersonaje.add ()
+		        	 datosPersonaje.add ()
+		        	 */
+		        	 
+		
+		        	 
+		        	 
+		        	 
+		         }
+		              
+		      }
+		      catch(Exception e){
+		         e.printStackTrace();
+		      }finally{
+		   
+		         try{                    
+		            if( null != fr ){   
+		               fr.close();     
+		            }                  
+		         }catch (Exception e2){ 
+		            e2.printStackTrace();
+		         }
+		      }
+		   }
+	
 		return null;
 
 	}
