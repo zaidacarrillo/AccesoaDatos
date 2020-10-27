@@ -1,0 +1,36 @@
+<libros>
+	<libro>
+		<Titulo>Los pilares de la Tierra</Titulo>
+		<Editorial>Macmillan</Editorial>
+		<Autor>Kent Follet</Autor>
+		<FechaDePublicacion>01/05/1989</FechaDePublicacion>
+		<Genero>Novela Historica</Genero>
+		<PersonajesPrincipales>
+			<Personaje>
+				<Nombre>Jack</Nombre>
+				<Importancia>Principal</Importancia>
+			</Personaje>
+			<Personaje>
+				<Nombre>Philip</Nombre>
+				<Importancia>Principal</Importancia>
+			</Personaje>
+		</PersonajesPrincipales>
+	</libro>
+  <libro>
+		<Titulo>Los pilares de la Tierra</Titulo>
+		<Editorial>Macmillan</Editorial>
+		<Autor>Kent Follet</Autor>
+		<FechaDePublicacion>01/05/1989</FechaDePublicacion>
+		<Genero>Novela Historica</Genero>
+		<PersonajesPrincipales>
+			<Personaje>
+				<Nombre>Jack</Nombre>
+				<Importancia>Principal</Importancia>
+			</Personaje>
+			<Personaje>
+				<Nombre>Philip</Nombre>
+				<Importancia>Principal</Importancia>
+			</Personaje>
+		</PersonajesPrincipales>
+	</libro>
+</libros>
