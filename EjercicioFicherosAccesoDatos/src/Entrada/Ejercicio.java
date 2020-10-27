@@ -9,6 +9,7 @@ import Negocio.IProcesamientoFichero;
 import Negocio.ProcesamientoFichero;
 import Negocio.ProcesamientoFicheroObjetos;
 import Negocio.ProcesamientoFicheroPlano;
+import Negocio.ProcesamientoFicheroXMLDOM;
 
 public class Ejercicio {
 
@@ -33,8 +34,22 @@ public class Ejercicio {
 		listaLibros = proc.leerFichero("C:\\Users\\PC33\\Documents\\prueba\\prueba.txt");
 
 		IProcesamientoFichero proc2 = new ProcesamientoFicheroObjetos();
-		proc2.guardarFichero(listaLibros, "C:\\Users\\PC33\\Documents\\prueba\\prueba2.txt");
+		proc2.guardarFichero(libros, "C:\\Users\\PC33\\Documents\\prueba\\prueba2.txt");
 		listaLibros = proc2.leerFichero("C:\\Users\\PC33\\Documents\\prueba\\prueba2.txt");
+
+		IProcesamientoFichero proc3 = new ProcesamientoFicheroXMLDOM();
+		proc3.guardarFichero(libros, "C:\\Users\\PC33\\Documents\\prueba\\prueba3.txt");
+		listaLibros = proc3.leerFichero("C:\\Users\\PC33\\Documents\\prueba\\prueba3.txt");
+
+		IProcesamientoFichero proc4 = new ProcesamientoFicheroXMLDOM();
+		proc4.guardarFichero(libros, "C:\\Users\\PC33\\Documents\\prueba\\prueba4.txt");
+		listaLibros = proc4.leerFichero("C:\\Users\\PC33\\Documents\\prueba\\prueba4.txt");
+
+		/*
+		 * for(Libro p: listaLibros) { System.out.println(p.toString());
+		 * 
+		 * }
+		 */
 
 	}
 
