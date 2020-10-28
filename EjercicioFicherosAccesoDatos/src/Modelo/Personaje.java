@@ -14,6 +14,10 @@ public class Personaje implements Serializable {
 		this.nombre = nombre;
 		this.importancia = importancia;
 	}
+	
+	public Personaje () {
+		
+	}
 
 	public String getNombre() {
 		return nombre;

@@ -1,34 +1,29 @@
 package Modelo;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
 
 import Negocio.LocalDateAdapterXML;
 
-@XmlRootElement
-@XmlType(propOrder={"tituloLibro", "editorial", "autor","fechaNacimiento","genero","personajesPrincipales"})
-public class Libro implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class LibroGSON {
+	@SerializedName(value = "tituloLibro")
 	private String tituloLibro;
+	@SerializedName(value = "editorial")
 	private String editorial;
+	@SerializedName(value = "autor")
 	private String autor;
+	@SerializedName("fechaDePublicacion")
+	//@JsonAdapter(JsonAdapter.class)
 	private LocalDate fechaNacimiento;
+	@SerializedName(value = "genero")
 	private String genero;
+	@SerializedName(value = "personajesPrincipales")
 	private ArrayList<Personaje> personajesPrincipales;
 	
-	
-	public Libro(String tituloLibro, String editorial, String autor, LocalDate fecha, String genero,
+
+	public LibroGSON(String tituloLibro, String editorial, String autor, LocalDate fecha, String genero,
 			ArrayList<Personaje> personajesPrincipales) {
 		this.tituloLibro = tituloLibro;
 		this.editorial = editorial;
@@ -37,7 +32,7 @@ public class Libro implements Serializable {
 		this.autor = autor;
 		this.personajesPrincipales = personajesPrincipales;
 	}
-	public Libro() {
+	public LibroGSON() {
 	
 	}
 	
@@ -54,7 +49,7 @@ public class Libro implements Serializable {
 	public String getTituloLibro() {
 		return tituloLibro;
 	}
-	@XmlElement(name="Titulo")
+	
 	public void setTituloLibro(String tituloLibro) {
 		this.tituloLibro = tituloLibro;
 	}
@@ -62,7 +57,7 @@ public class Libro implements Serializable {
 	public String getEditorial() {
 		return editorial;
 	}
-	@XmlElement(name="Editorial")
+	
 	public void setEditorial(String editorial) {
 		this.editorial = editorial;
 	}
@@ -70,7 +65,7 @@ public class Libro implements Serializable {
 	public String getAutor() {
 		return autor;
 	}
-	@XmlElement(name="Autor")
+	
 	public void setAutor(String autor) {
 		this.autor = autor;
 	}
@@ -78,8 +73,7 @@ public class Libro implements Serializable {
 	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
-	@XmlElement(name="FechaDePublicacion")
-	@XmlJavaTypeAdapter(value = LocalDateAdapterXML.class)
+	
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
@@ -87,7 +81,7 @@ public class Libro implements Serializable {
 	public String getGenero() {
 		return genero;
 	}
-	@XmlElement(name="Genero")
+	
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
@@ -95,10 +89,11 @@ public class Libro implements Serializable {
 	public ArrayList<Personaje> getPersonajesPrincipales() {
 		return personajesPrincipales;
 	}
-	@XmlElementWrapper(name="personajesPrincipales")
-	@XmlElement(name="personaje")
+	
 	public void setPersonajesPrincipales(ArrayList<Personaje> personajesPrincipales) {
 		this.personajesPrincipales = personajesPrincipales;
 	}
 
 }
+
+
