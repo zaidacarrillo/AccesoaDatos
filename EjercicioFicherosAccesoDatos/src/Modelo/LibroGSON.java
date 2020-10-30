@@ -15,13 +15,12 @@ public class LibroGSON {
 	@SerializedName(value = "autor")
 	private String autor;
 	@SerializedName("fechaDePublicacion")
-	//@JsonAdapter(JsonAdapter.class)
+	// @JsonAdapter(JsonAdapter.class)
 	private LocalDate fechaNacimiento;
 	@SerializedName(value = "genero")
 	private String genero;
 	@SerializedName(value = "personajesPrincipales")
 	private ArrayList<Personaje> personajesPrincipales;
-	
 
 	public LibroGSON(String tituloLibro, String editorial, String autor, LocalDate fecha, String genero,
 			ArrayList<Personaje> personajesPrincipales) {
@@ -32,10 +31,10 @@ public class LibroGSON {
 		this.autor = autor;
 		this.personajesPrincipales = personajesPrincipales;
 	}
+
 	public LibroGSON() {
-	
+
 	}
-	
 
 	@Override
 	public String toString() {
@@ -44,12 +43,10 @@ public class LibroGSON {
 				+ personajesPrincipales + "]";
 	}
 
-
-	
 	public String getTituloLibro() {
 		return tituloLibro;
 	}
-	
+
 	public void setTituloLibro(String tituloLibro) {
 		this.tituloLibro = tituloLibro;
 	}
@@ -57,15 +54,15 @@ public class LibroGSON {
 	public String getEditorial() {
 		return editorial;
 	}
-	
+
 	public void setEditorial(String editorial) {
 		this.editorial = editorial;
 	}
-	
+
 	public String getAutor() {
 		return autor;
 	}
-	
+
 	public void setAutor(String autor) {
 		this.autor = autor;
 	}
@@ -73,7 +70,7 @@ public class LibroGSON {
 	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
-	
+
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
@@ -81,7 +78,7 @@ public class LibroGSON {
 	public String getGenero() {
 		return genero;
 	}
-	
+
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
@@ -89,11 +86,9 @@ public class LibroGSON {
 	public ArrayList<Personaje> getPersonajesPrincipales() {
 		return personajesPrincipales;
 	}
-	
+
 	public void setPersonajesPrincipales(ArrayList<Personaje> personajesPrincipales) {
 		this.personajesPrincipales = personajesPrincipales;
 	}
 
 }
-
-
