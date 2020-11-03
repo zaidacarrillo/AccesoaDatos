@@ -17,7 +17,9 @@ import Modelo.Libro;
 import Modelo.Personaje;
 
 public class ProcesamientoFicheroPlano extends ProcesamientoFichero {
-
+	/**
+	 * Lectura de fichero plano, cuyo guardado se ejecuta de manera que se siga un patrón específico de caracteres.
+	 */
 	@Override
 	public ArrayList<Libro> leerFichero(String ruta) {
 		ArrayList<Libro> listaLibros = new ArrayList();

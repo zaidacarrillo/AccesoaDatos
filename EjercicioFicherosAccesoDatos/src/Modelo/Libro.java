@@ -17,7 +17,7 @@ import Negocio.LocalDateAdapterXML;
 public class Libro implements Serializable {
 
 	/**
-	 * 
+	 * Estructura de Libro, getters, setters y constructor vacío.
 	 */
 	private static final long serialVersionUID = 1L;
 	private String tituloLibro;
@@ -54,6 +54,10 @@ public class Libro implements Serializable {
 	public String getTituloLibro() {
 		return tituloLibro;
 	}
+	/**
+	 * 
+	 * @XmlElement como etiqueta elemento, en el procesamiento XMLJAXB.
+	 */
 	@XmlElement(name="Titulo")
 	public void setTituloLibro(String tituloLibro) {
 		this.tituloLibro = tituloLibro;
@@ -95,6 +99,10 @@ public class Libro implements Serializable {
 	public ArrayList<Personaje> getPersonajesPrincipales() {
 		return personajesPrincipales;
 	}
+	/**
+	 * 
+	 * @XmlElementWrapper wrapper para elemento con name:personajesPrincipales que depende de @XmlElement name: personaje.
+	 */
 	@XmlElementWrapper(name="personajesPrincipales")
 	@XmlElement(name="personaje")
 	public void setPersonajesPrincipales(ArrayList<Personaje> personajesPrincipales) {

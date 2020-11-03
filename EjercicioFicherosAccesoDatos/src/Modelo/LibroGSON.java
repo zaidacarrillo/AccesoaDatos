@@ -8,6 +8,10 @@ import com.google.gson.annotations.SerializedName;
 import Negocio.LocalDateAdapterXML;
 
 public class LibroGSON {
+	/**
+	 * Estructura de LibroGSON, aplicada a la lectura y escritira Json mediante gson.
+	 * @SerializedName, etiqueta editificativa de elemento.
+	 */
 	@SerializedName(value = "tituloLibro")
 	private String tituloLibro;
 	@SerializedName(value = "editorial")

@@ -13,7 +13,10 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 public class JsonAdapter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
-
+/**
+ * Clase parser de Local Date para el procesamiento Json.
+ * @param date Fecha a parsear.
+ */
 	@Override
 	public JsonElement serialize(LocalDate date, Type typeOfSrc, JsonSerializationContext context) {
 		return new JsonPrimitive(date.format(DateTimeFormatter.ISO_LOCAL_DATE));

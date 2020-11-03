@@ -29,71 +29,77 @@ import Modelo.Libro;
 import Modelo.Personaje;
 
 public class ProcesamientoFicheroXMLDOM extends ProcesamientoFichero {
-
+/**
+ * Lectura de fichero mediante el sistema XMLDOM.
+ */
 	@Override
 	public ArrayList<Libro> leerFichero(String ruta) {
 		ArrayList<Libro> libros = new ArrayList<Libro>();
-		DocumentBuilder builder = null;
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		try {
-			builder = factory.newDocumentBuilder();
-			Document document = builder.parse(new File(ruta));
-			NodeList nodeList = document.getDocumentElement().getChildNodes();
+		if (existeFichero(ruta) == true) {
+			DocumentBuilder builder = null;
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			try {
+				builder = factory.newDocumentBuilder();
+				Document document = builder.parse(new File(ruta));
+				NodeList nodeList = document.getDocumentElement().getChildNodes();
 
-			for (int i = 0; i < nodeList.getLength(); i++) {
-				Node node = nodeList.item(i);
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element eLLibro = (Element) node;
+				for (int i = 0; i < nodeList.getLength(); i++) {
+					Node node = nodeList.item(i);
+					if (node.getNodeType() == Node.ELEMENT_NODE) {
+						Element eLLibro = (Element) node;
 
-					String titulo = eLLibro.getElementsByTagName("Titulo").item(0).getChildNodes().item(0)
-							.getNodeValue();
-					String editorial = eLLibro.getElementsByTagName("Editorial").item(0).getChildNodes().item(0)
-							.getNodeValue();
-					String autor = eLLibro.getElementsByTagName("Autor").item(0).getChildNodes().item(0).getNodeValue();
-					String fechaPublicacion = eLLibro.getElementsByTagName("FechaDePublicacion").item(0).getChildNodes()
-							.item(0).getNodeValue();
-					String genero = eLLibro.getElementsByTagName("Genero").item(0).getChildNodes().item(0)
-							.getNodeValue();
+						String titulo = eLLibro.getElementsByTagName("Titulo").item(0).getChildNodes().item(0)
+								.getNodeValue();
+						String editorial = eLLibro.getElementsByTagName("Editorial").item(0).getChildNodes().item(0)
+								.getNodeValue();
+						String autor = eLLibro.getElementsByTagName("Autor").item(0).getChildNodes().item(0)
+								.getNodeValue();
+						String fechaPublicacion = eLLibro.getElementsByTagName("FechaDePublicacion").item(0)
+								.getChildNodes().item(0).getNodeValue();
+						String genero = eLLibro.getElementsByTagName("Genero").item(0).getChildNodes().item(0)
+								.getNodeValue();
 
-					Element personajes = (Element) eLLibro.getElementsByTagName("PersonajesPrincipales").item(0);
-					NodeList nodeListPersonajes = personajes.getChildNodes();
-					ArrayList personaje = new ArrayList();
-					for (int z = 0; z < nodeListPersonajes.getLength(); z++) {
-						Node nodePersonaje = nodeListPersonajes.item(z);
-						Personaje p = null;
+						Element personajes = (Element) eLLibro.getElementsByTagName("PersonajesPrincipales").item(0);
+						NodeList nodeListPersonajes = personajes.getChildNodes();
+						ArrayList personaje = new ArrayList();
+						for (int z = 0; z < nodeListPersonajes.getLength(); z++) {
+							Node nodePersonaje = nodeListPersonajes.item(z);
+							Personaje p = null;
 
-						if (nodePersonaje.getNodeType() == Node.ELEMENT_NODE) {
-							Element Personaje = (Element) nodePersonaje;
+							if (nodePersonaje.getNodeType() == Node.ELEMENT_NODE) {
+								Element Personaje = (Element) nodePersonaje;
 
-							String nombre = Personaje.getElementsByTagName("Nombre").item(0).getChildNodes().item(0)
-									.getNodeValue();
-							String importancia = Personaje.getElementsByTagName("Importancia").item(0).getChildNodes()
-									.item(0).getNodeValue();
-							p = new Personaje(nombre, importancia);
-							personaje.add(p);
+								String nombre = Personaje.getElementsByTagName("Nombre").item(0).getChildNodes().item(0)
+										.getNodeValue();
+								String importancia = Personaje.getElementsByTagName("Importancia").item(0)
+										.getChildNodes().item(0).getNodeValue();
+								p = new Personaje(nombre, importancia);
+								personaje.add(p);
+							}
+
 						}
-
+						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-dd-MM");
+						LocalDate localDate = LocalDate.parse(fechaPublicacion, formatter);
+						Libro l1 = new Libro(titulo, editorial, autor, localDate, genero, personaje);
+						libros.add(l1);
+						return libros;
 					}
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-dd-MM");
-					LocalDate localDate = LocalDate.parse(fechaPublicacion, formatter);
-					Libro l1 = new Libro(titulo, editorial, autor, localDate, genero, personaje);
-					libros.add(l1);
-					return libros;
+
 				}
 
+			} catch (ParserConfigurationException e) {
+				e.printStackTrace();
+			} catch (SAXException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
-
 		return null;
 	}
-
+/**
+ * Guardado de fichero mediante el sistema XMLDOM, necesaria la declaración de elementos y nodos.
+ */
 	@Override
 	public void guardarFichero(List<Libro> listaLibros, String ruta) {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();

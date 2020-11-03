@@ -26,6 +26,8 @@ public class ProcesamientoFicheroJSONGSON extends ProcesamientoFichero {
 	 */
 	public ArrayList<Libro> leerFichero(String ruta) {
 		ArrayList<Libro> libros = new ArrayList();
+		
+		if (existeFichero(ruta) == true) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(LocalDate.class, new JsonAdapter())
 				.create();
 		;
@@ -40,14 +42,16 @@ public class ProcesamientoFicheroJSONGSON extends ProcesamientoFichero {
 				libros.add(l1);
 			}
 
-			return libros;
+			
 		} catch (FileNotFoundException e) {
 
 			e.printStackTrace();
 		}
-
-		return null;
+		
 	}
+		return libros;
+	
+}
 
 	@Override
 	/**

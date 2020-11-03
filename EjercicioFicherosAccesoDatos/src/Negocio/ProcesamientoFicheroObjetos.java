@@ -18,9 +18,11 @@ public class ProcesamientoFicheroObjetos extends ProcesamientoFichero{
 
 	@Override
 	public ArrayList<Libro> leerFichero(String ruta) {
+		ArrayList<Libro> listaLibro = new ArrayList<>();
+		if (existeFichero(ruta) == true) {
 		File fichero = new File(ruta);
 		ObjectInputStream ois = null;
-		ArrayList<Libro> listaLibro = new ArrayList<>();
+		
 		try {
 			ois = new ObjectInputStream(new FileInputStream(fichero));
 
@@ -51,9 +53,11 @@ public class ProcesamientoFicheroObjetos extends ProcesamientoFichero{
 			e.printStackTrace();
 		}
 
-		return listaLibro;
+		
 
 	}
+		return listaLibro;
+}
 	
 
 	@Override

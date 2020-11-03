@@ -17,23 +17,36 @@ import Negocio.ProcesamientoFicheroXMLJAXB;
 public class Ejercicio {
 
 	public static void main(String[] args) {
+		/**
+		 * Clase main, entrada de programa.
+		 */
 		int añodeNacimiento = 2001;
 		int mesdeNacimiento = 4;
 		int diadeNacimiento = 3;
+		/**
+		 * Creación de objeto tipo LocalDate para aplicar fechas a los objetos tipo libro.
+		 */
 		LocalDate fecha = LocalDate.of(añodeNacimiento, mesdeNacimiento, diadeNacimiento);
-
+		/**
+		 * @parameter ArrayList<Personaje> personajesPrincipales contiene la lista de personajes.
+		 */
 		ArrayList<Personaje> personajesPrincipales = new ArrayList<>();
 		personajesPrincipales.add(new Personaje("Mildrelis", "principal"));
 		personajesPrincipales.add(new Personaje("Jerry", "secundario"));
+		/**
+		 * @parameter ArrayList<Libro> libros contiene los elementos de tipo libro con su lista de personajes en él.
+		 */
 		ArrayList<Libro> libros = new ArrayList<>();
-
 		libros.add(new Libro("El planeta de los Simios", "planeta", "Carlos Martinez", fecha, "drama",
 				personajesPrincipales));
 		libros.add(new Libro("El principito", "planeta2", "Jesus Fernandez", fecha, "accion", personajesPrincipales));
 		ArrayList<Libro> listaLibros = new ArrayList();
-
+		/**
+		 * Invocación de cada una de las clases "Procesamiento"
+		 * @param lista libros, Array de recojida de datos de lectura
+		 * @param libros, Array con datos para el guardado de los mismos.
+		 */
 		IProcesamientoFichero proc = new ProcesamientoFicheroPlano();
-		System.out.println("Se guardará un fichero de texto PLANO.");
 		proc.guardarFichero(libros, "C:\\Users\\PC33\\Documents\\prueba\\LibroenFicheroPlano.txt");
 		listaLibros = proc.leerFichero("C:\\Users\\PC33\\Documents\\prueba\\prueba.txt");
 
@@ -52,6 +65,8 @@ public class Ejercicio {
 		IProcesamientoFichero proc5 = new ProcesamientoFicheroJSONGSON();
 		proc5.guardarFichero(libros, "C:\\Users\\PC33\\Documents\\prueba\\LibroenFicheroJSONGSON.txt");
 		listaLibros = proc5.leerFichero("C:\\Users\\PC33\\Documents\\prueba\\prueba5.txt");
+		
+		System.out.println("Guardado exitoso.");
 
 	}
 

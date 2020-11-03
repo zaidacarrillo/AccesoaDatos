@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Personaje implements Serializable {
 	/**
-	 * 
+	 * Estructura de Personaje, getters, setters y constructor vacío.
 	 */
 	private static final long serialVersionUID = 1L;
 	private String nombre;
