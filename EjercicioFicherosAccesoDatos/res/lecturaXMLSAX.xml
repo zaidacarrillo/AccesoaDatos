@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<libros>
+    <libro>
+        <Titulo>El planeta de los Simios</Titulo>
+        <Editorial>planeta</Editorial>
+        <Autor>Carlos Martinez</Autor>
+        <FechaDePublicacion>2001-04-03</FechaDePublicacion>
+        <Genero>drama</Genero>
+        <personajesPrincipales>
+            <personaje>
+                <importancia>principal</importancia>
+                <nombre>Mildrelis</nombre>
+            </personaje>
+            <personaje>
+                <importancia>secundario</importancia>
+                <nombre>Jerry</nombre>
+            </personaje>
+        </personajesPrincipales>
+    </libro>
+    <libro>
+        <Titulo>El principito</Titulo>
+        <Editorial>planeta2</Editorial>
+        <Autor>Jesus Fernandez</Autor>
+        <FechaDePublicacion>2001-04-03</FechaDePublicacion>
+        <Genero>accion</Genero>
+        <personajesPrincipales>
+            <personaje>
+                <importancia>principal</importancia>
+                <nombre>Mildrelis</nombre>
+            </personaje>
+            <personaje>
+                <importancia>secundario</importancia>
+                <nombre>Jerry</nombre>
+            </personaje>
+        </personajesPrincipales>
+    </libro>
+</libros>

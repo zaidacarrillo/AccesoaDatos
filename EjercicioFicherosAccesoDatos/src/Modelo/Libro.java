@@ -23,7 +23,7 @@ public class Libro implements Serializable {
 	private String tituloLibro;
 	private String editorial;
 	private String autor;
-	private LocalDate fechaNacimiento;
+	private LocalDate fechaPublicacion;
 	private String genero;
 	private ArrayList<Personaje> personajesPrincipales;
 	
@@ -32,7 +32,7 @@ public class Libro implements Serializable {
 			ArrayList<Personaje> personajesPrincipales) {
 		this.tituloLibro = tituloLibro;
 		this.editorial = editorial;
-		this.fechaNacimiento = fecha;
+		this.fechaPublicacion = fecha;
 		this.genero = genero;
 		this.autor = autor;
 		this.personajesPrincipales = personajesPrincipales;
@@ -45,7 +45,7 @@ public class Libro implements Serializable {
 	@Override
 	public String toString() {
 		return "Libro [tituloLibro=" + tituloLibro + ", editorial=" + editorial + ", autor=" + autor
-				+ ", fechaNacimiento=" + fechaNacimiento + ", genero=" + genero + ", personajesPrincipales="
+				+ ", fechaNacimiento=" + fechaPublicacion + ", genero=" + genero + ", personajesPrincipales="
 				+ personajesPrincipales + "]";
 	}
 
@@ -80,12 +80,12 @@ public class Libro implements Serializable {
 	}
 
 	public LocalDate getFechaNacimiento() {
-		return fechaNacimiento;
+		return fechaPublicacion;
 	}
 	@XmlElement(name="FechaDePublicacion")
 	@XmlJavaTypeAdapter(value = LocalDateAdapterXML.class)
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
+		this.fechaPublicacion = fechaNacimiento;
 	}
 
 	public String getGenero() {

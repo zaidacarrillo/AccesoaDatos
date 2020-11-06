@@ -13,6 +13,7 @@ import Negocio.ProcesamientoFicheroObjetos;
 import Negocio.ProcesamientoFicheroPlano;
 import Negocio.ProcesamientoFicheroXMLDOM;
 import Negocio.ProcesamientoFicheroXMLJAXB;
+import Negocio.ProcesamientoFicheroXMLSAX;
 
 public class Ejercicio {
 
@@ -65,6 +66,9 @@ public class Ejercicio {
 		IProcesamientoFichero proc5 = new ProcesamientoFicheroJSONGSON();
 		proc5.guardarFichero(libros, "C:\\Users\\PC33\\Documents\\prueba\\LibroenFicheroJSONGSON.txt");
 		listaLibros = proc5.leerFichero("C:\\Users\\PC33\\Documents\\prueba\\prueba5.txt");
+		
+		IProcesamientoFichero proc6 = new ProcesamientoFicheroXMLSAX();
+		listaLibros = proc6.leerFichero("C:\\Users\\PC33\\Documents\\prueba\\prueba6.txt");
 		
 		System.out.println("Guardado exitoso.");
 
