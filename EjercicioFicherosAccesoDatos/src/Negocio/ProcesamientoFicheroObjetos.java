@@ -38,6 +38,7 @@ public class ProcesamientoFicheroObjetos extends ProcesamientoFichero{
 		} catch (ClassNotFoundException e) {
 
 			e.printStackTrace();
+			//excepcion para el bucle infinito.
 		} catch (EOFException exc) {
 		
 			System.out.println("Ha llegado al final del fichero.");

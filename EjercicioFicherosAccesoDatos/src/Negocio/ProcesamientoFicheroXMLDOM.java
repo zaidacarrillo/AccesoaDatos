@@ -41,11 +41,17 @@ public class ProcesamientoFicheroXMLDOM extends ProcesamientoFichero {
 			try {
 				builder = factory.newDocumentBuilder();
 				Document document = builder.parse(new File(ruta));
+				//Nodopadre libros que se iguala a document que obtiene el elemento libro
 				NodeList nodeList = document.getDocumentElement().getChildNodes();
 
+				//se recorre nodo padre
 				for (int i = 0; i < nodeList.getLength(); i++) {
+					//creo nodo libro (hijo de libros)
+					//Un nodo que se actualiza en depende que posicion de la lista nodeList
 					Node node = nodeList.item(i);
 					if (node.getNodeType() == Node.ELEMENT_NODE) {
+						//el nodo libro lo casteo a tipo elemento para poder usar metodos de tipo element
+						//elemento padre de los hijos que se obtienen a continuacion
 						Element eLLibro = (Element) node;
 
 						String titulo = eLLibro.getElementsByTagName("Titulo").item(0).getChildNodes().item(0)
@@ -58,8 +64,9 @@ public class ProcesamientoFicheroXMLDOM extends ProcesamientoFichero {
 								.getChildNodes().item(0).getNodeValue();
 						String genero = eLLibro.getElementsByTagName("Genero").item(0).getChildNodes().item(0)
 								.getNodeValue();
-
+						
 						Element personajes = (Element) eLLibro.getElementsByTagName("PersonajesPrincipales").item(0);
+						//Nodopadre Personajes principales que se iguala a el elemento personajes creado en la linea anterior
 						NodeList nodeListPersonajes = personajes.getChildNodes();
 						ArrayList personaje = new ArrayList();
 						for (int z = 0; z < nodeListPersonajes.getLength(); z++) {
@@ -73,7 +80,9 @@ public class ProcesamientoFicheroXMLDOM extends ProcesamientoFichero {
 										.getNodeValue();
 								String importancia = Personaje.getElementsByTagName("Importancia").item(0)
 										.getChildNodes().item(0).getNodeValue();
+								//se crea un objeto de tipo personaje para guardar nombre y importancia
 								p = new Personaje(nombre, importancia);
+								//se agrega al arraylist personaje
 								personaje.add(p);
 							}
 
