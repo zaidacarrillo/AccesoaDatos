@@ -1,0 +1,14 @@
+package capaDatos;
+
+import java.sql.Connection;
+
+public interface IConexion {
+	
+	
+	public Connection creacionConexion();
+
+	public void cerrarConexion(Connection con);
+
+	
+
+}
