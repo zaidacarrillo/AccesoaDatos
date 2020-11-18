@@ -19,6 +19,18 @@ public class Programa {
 			IAsignatura ias = new AsignaturaDAO();
 					 */
 		
+		/*
+		 * Ciclo c = new Ciclo("DAM","SUP");
+		 * IcicloDAO cicDAO = new ""();
+		 * cicDAO.insertar(c);
+		 * 
+		 * Asignatura a = new Asignatura("INTERFACES",180,c.getId());
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
+		
 
 	}
 

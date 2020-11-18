@@ -2,7 +2,9 @@ package capaDatos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import capaModelo.ICicloDAO;
@@ -25,8 +27,7 @@ public class CicloDAO implements ICicloDAO{
 
 			ps.setString(1, ciclo.getNombre());
 			ps.setString(2, ciclo.getGrado());
-			ps.addBatch();
-			ps.executeBatch();
+			ps.execute();
 
 		} catch (SQLException e) {
 			System.out.println("Error en la ejecución de la consulta insertar objeto ciclo.");
@@ -87,11 +88,10 @@ public class CicloDAO implements ICicloDAO{
 		try {
 			PreparedStatement psEliminar = c.prepareStatement(consulta);
 			psEliminar.setInt(1, ciclo.getId());
-			psEliminar.addBatch();
-			psEliminar.executeBatch();
+			psEliminar.execute();
 			
 		} catch (SQLException e) {
-			System.out.println("Error en la ejecución de la consulta borrar registros de tipo id.");
+			System.out.println("Error en la ejecución de la consulta borrar registros de tipo id(CICLO).");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -123,7 +123,7 @@ public class CicloDAO implements ICicloDAO{
 			
 			pseliminarMultiples.executeBatch();
 		} catch (SQLException e) {
-			System.out.println("Error en la ejecución de la consulta borrar múltiples registros de tipo id.");
+			System.out.println("Error en la ejecución de la consulta borrar múltiples registros de tipo id (CICLO).");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -149,8 +149,7 @@ public class CicloDAO implements ICicloDAO{
 			psmodificar.setString(1, ciclo.getNombre());
 			psmodificar.setString(2, ciclo.getGrado());
 			psmodificar.setInt(3, ciclo.getId());
-			psmodificar.addBatch();
-			psmodificar.executeBatch();
+			psmodificar.execute();
 			
 		} catch (SQLException e) {
 			System.out.println("Error en la ejecución de la consulta modificar un registro de tipo id.");
@@ -185,7 +184,7 @@ public class CicloDAO implements ICicloDAO{
 			
 			psmodificarMultiple.executeBatch();
 		} catch (SQLException e) {
-			
+			System.out.println("Error en la ejecución (Eliminación múltiple)");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -208,33 +207,50 @@ public class CicloDAO implements ICicloDAO{
 			c.setAutoCommit(false);
 			//INSERCIÓN OBJETO CICLO EN TABLA CICLO 
 			String consulta = "INSERT INTO CICLO (NOMBRE, GRADO) VALUES (?,?);";
-			PreparedStatement ps = c.prepareStatement(consulta);
+			PreparedStatement ps = c.prepareStatement(consulta, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, ciclo.getNombre());
 			ps.setString(2, ciclo.getGrado());
 		
 			ps.executeUpdate();
 			//Obtencion id ciclo
-			
-			
+			ResultSet rs = ps.getGeneratedKeys();
+			rs.next();
+			int id = rs.getInt(1);
+			ps.close();
 			//INSERCION ASIGNATURAS
-			String consulta2 = "INSERT INTO ASIGNATURAS (ID, NOMBRE, HORAS) VALUES (?,?);";
+			String consulta2 = "INSERT INTO ASIGNATURAS (ID, NOMBRE, HORAS, IDCICLO) VALUES (?,?);";
 			PreparedStatement ps2 = c.prepareStatement(consulta);
-			
 		
 			for(Asignatura a : listaAsignaturas) {
-				ps2.setInt(1, ciclo.getId());
+				ps2.setInt(1, a.getId());
 				ps2.setString(2, a.getNombre());
 				ps2.setInt(3, a.getHorasSemanales());
+				ps2.setInt(4, id);
 				ps2.addBatch();
 			}
 			ps2.executeBatch();
 			
 			c.commit();
+			ps2.close();
 		} catch (SQLException e) {
-			
+			System.out.println("Error en la ejecución de la consulta crearCicloAsignaturas.");
+			try {
+				c.rollback();
+			} catch (SQLException e1) {
+			System.out.println("No ha sido posible realizar un rollback.");
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
+		} finally {
+			try {
+				if (c != null && !c.isClosed()) {
+					con.cerrarConexion(c);
+				}
+			} catch (SQLException e) {
+				System.out.println("No se pudo cerrar la conexión.");
+				e.printStackTrace();
+			}
 		}
-		
 
 	}
 
