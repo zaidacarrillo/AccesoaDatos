@@ -18,17 +18,25 @@ public class CicloDAO implements ICicloDAO{
 		ConexionMySQL con = new ConexionMySQL();
 
 		Connection c = con.creacionConexion();
-
+		
 		String consulta = "INSERT INTO CICLO" 
 						+ "(NOMBRE, GRADO) VALUES" 
 						+ "(?, ?);";
 		try {
-			PreparedStatement ps = c.prepareStatement(consulta);
+			c.setAutoCommit(false);
+			PreparedStatement ps = c.prepareStatement(consulta, Statement.RETURN_GENERATED_KEYS);
 
 			ps.setString(1, ciclo.getNombre());
 			ps.setString(2, ciclo.getGrado());
 			ps.execute();
-
+			
+			ResultSet rs = ps.getGeneratedKeys();
+			rs.next();
+			int id= rs.getInt(1);
+			ciclo.setId(id);
+			c.commit();
+			ps.close();
+			c.close();
 		} catch (SQLException e) {
 			System.out.println("Error en la ejecución de la consulta insertar objeto ciclo.");
 			e.printStackTrace();
@@ -53,16 +61,31 @@ public class CicloDAO implements ICicloDAO{
 						+ "(NOMBRE, GRADO) VALUES" 
 						+ "(?, ?);";
 		try {
-			PreparedStatement psMultiple = c.prepareStatement(consulta);
+			PreparedStatement psMultiple = c.prepareStatement(consulta, Statement.RETURN_GENERATED_KEYS);
 			for (Ciclo ci : listaCiclos) {
 				psMultiple.setString(1, ci.getNombre());
 				psMultiple.setString(2, ci.getGrado());
 				psMultiple.addBatch();
-			
-
+				
 			}
 
 			psMultiple.executeBatch();
+			
+			int cont=0;
+			ResultSet rs = psMultiple.getGeneratedKeys();
+			while(rs.next()) {
+				listaCiclos.get(cont).setId(rs.getInt(1));
+				 cont++;
+			}
+			
+			//Otra forma de hacerlo:
+			/*
+			 * for(Ciclo c : listaCiclos){
+			 * 		rs.next
+			 * 		a.setId(rs.getInt(1));
+			 * }
+			 */
+			psMultiple.close();
 		} catch (SQLException e) {
 			System.out.println("Error en la ejecución de la consulta insertar múltiples objetos de tipo ciclo.");
 			e.printStackTrace();
@@ -90,6 +113,11 @@ public class CicloDAO implements ICicloDAO{
 			psEliminar.setInt(1, ciclo.getId());
 			psEliminar.execute();
 			
+	 	  /*ResultSet rs = psEliminar.getGeneratedKeys();
+			rs.next();
+			int id = rs.getInt(1);
+			ciclo.setId(id);*/
+			psEliminar.close();
 		} catch (SQLException e) {
 			System.out.println("Error en la ejecución de la consulta borrar registros de tipo id(CICLO).");
 			e.printStackTrace();
@@ -122,6 +150,14 @@ public class CicloDAO implements ICicloDAO{
 			}
 			
 			pseliminarMultiples.executeBatch();
+			
+			//ResultSet rs = pseliminarMultiples.getGeneratedKeys();
+			/*for(Ciclo ci : listaCiclos) {
+				rs.next();
+				ci.setId(rs.getInt(1));
+			}*/
+			
+			pseliminarMultiples.close();
 		} catch (SQLException e) {
 			System.out.println("Error en la ejecución de la consulta borrar múltiples registros de tipo id (CICLO).");
 			e.printStackTrace();
@@ -150,6 +186,7 @@ public class CicloDAO implements ICicloDAO{
 			psmodificar.setString(2, ciclo.getGrado());
 			psmodificar.setInt(3, ciclo.getId());
 			psmodificar.execute();
+			psmodificar.close();
 			
 		} catch (SQLException e) {
 			System.out.println("Error en la ejecución de la consulta modificar un registro de tipo id.");
@@ -183,6 +220,13 @@ public class CicloDAO implements ICicloDAO{
 			}
 			
 			psmodificarMultiple.executeBatch();
+			
+		 /*ResultSet rs = psmodificarMultiple.getGeneratedKeys();
+			for(Ciclo ci : listaCiclos) {
+				rs.next();
+				ci.setId(rs.getInt(1));
+			}*/
+			psmodificarMultiple.close();
 		} catch (SQLException e) {
 			System.out.println("Error en la ejecución (Eliminación múltiple)");
 			e.printStackTrace();
@@ -216,19 +260,26 @@ public class CicloDAO implements ICicloDAO{
 			ResultSet rs = ps.getGeneratedKeys();
 			rs.next();
 			int id = rs.getInt(1);
+			ciclo.setId(id);
 			ps.close();
 			//INSERCION ASIGNATURAS
-			String consulta2 = "INSERT INTO ASIGNATURAS (ID, NOMBRE, HORAS, IDCICLO) VALUES (?,?);";
+			String consulta2 = "INSERT INTO ASIGNATURAS (ID, NOMBRE, HORAS, IDCICLO) VALUES (?,?,?,?));";
 			PreparedStatement ps2 = c.prepareStatement(consulta);
 		
 			for(Asignatura a : listaAsignaturas) {
 				ps2.setInt(1, a.getId());
 				ps2.setString(2, a.getNombre());
-				ps2.setInt(3, a.getHorasSemanales());
+				ps2.setInt(3, a.getHoras());
 				ps2.setInt(4, id);
 				ps2.addBatch();
 			}
 			ps2.executeBatch();
+			
+			ResultSet rs2 = ps.getGeneratedKeys();
+			for(Asignatura a: listaAsignaturas) {
+				rs2.next();
+				a.setId(rs.getInt(1));
+			}
 			
 			c.commit();
 			ps2.close();

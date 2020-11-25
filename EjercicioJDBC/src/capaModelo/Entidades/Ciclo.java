@@ -28,5 +28,12 @@ public class Ciclo {
 		this.nombre = nombre;
 		this.grado = grado;
 	}
+	public Ciclo(int id, String nombre, String grado) {
+		super();
+		this.nombre = nombre;
+		this.grado = grado;
+		this.id = id;
+	}
+
 
 }
