@@ -26,6 +26,5 @@ public class AsignaturaVO {
 		this.horasSemanales = horasSemanales;
 	}
 	
-	
 
 }

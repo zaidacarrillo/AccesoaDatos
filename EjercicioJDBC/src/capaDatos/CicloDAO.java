@@ -1,5 +1,6 @@
 package capaDatos;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -250,7 +251,7 @@ public class CicloDAO implements ICicloDAO{
 		try {
 			c.setAutoCommit(false);
 			//INSERCIÓN OBJETO CICLO EN TABLA CICLO 
-			String consulta = "INSERT INTO CICLO (NOMBRE, GRADO) VALUES (?,?);";
+			String consulta = "INSERT INTO CICLO (NOMBRE, GRADO) VALUES (?, ?);";
 			PreparedStatement ps = c.prepareStatement(consulta, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, ciclo.getNombre());
 			ps.setString(2, ciclo.getGrado());
@@ -263,14 +264,14 @@ public class CicloDAO implements ICicloDAO{
 			ciclo.setId(id);
 			ps.close();
 			//INSERCION ASIGNATURAS
-			String consulta2 = "INSERT INTO ASIGNATURAS (ID, NOMBRE, HORAS, IDCICLO) VALUES (?,?,?,?));";
-			PreparedStatement ps2 = c.prepareStatement(consulta);
+			String consulta2 = "INSERT INTO ASIGNATURA (ID, NOMBRE, HORAS, IDCICLO) VALUES (?,?,?,?);";
+			PreparedStatement ps2 = c.prepareStatement(consulta2);
 		
 			for(Asignatura a : listaAsignaturas) {
 				ps2.setInt(1, a.getId());
 				ps2.setString(2, a.getNombre());
 				ps2.setInt(3, a.getHoras());
-				ps2.setInt(4, id);
+				ps2.setInt(4, ciclo.getId());
 				ps2.addBatch();
 			}
 			ps2.executeBatch();
@@ -303,6 +304,20 @@ public class CicloDAO implements ICicloDAO{
 			}
 		}
 
+	}
+	
+	public void deleteCiclo(Ciclo ciclo) {
+		ConexionMySQL con = new ConexionMySQL();
+		Connection c = con.creacionConexion();
+		try {
+			CallableStatement st = c.prepareCall("{ call deleteCiclo(?) }");
+			st.setString(1, ciclo.getNombre());
+			st.execute();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
 	}
 
 }
