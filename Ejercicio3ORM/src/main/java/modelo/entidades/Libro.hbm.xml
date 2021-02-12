@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 9 feb. 2021 10:03:19 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="ejercicioorm" dynamic-insert="false" dynamic-update="false" mutable="true" name="modelo.entidades.Libro" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="libro">
+        <id name="codLibro" type="string">
+            <column length="10" name="CodLibro"/>
+            <generator class="assigned"/>
+        </id>
+        <property generated="never" lazy="false" name="titulo" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="Titulo"/>
+        </property>
+        <property generated="never" lazy="false" name="editorial" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="Editorial"/>
+        </property>
+        <property generated="never" lazy="false" name="precio" optimistic-lock="true" type="java.lang.Float" unique="false">
+            <column name="Precio" precision="12" scale="0"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="autors" optimistic-lock="true" sort="unsorted" table="autorlibro">
+            <key on-delete="noaction">
+                <column length="10" name="CodLibro" not-null="true"/>
+            </key>
+            <many-to-many embed-xml="true" entity-name="modelo.entidades.Autor" not-found="exception" unique="false">
+                <column name="IdAutor" not-null="true"/>
+            </many-to-many>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="ejemplars" optimistic-lock="true" sort="unsorted" table="ejemplar">
+            <key on-delete="noaction">
+                <column length="10" name="CodLibro"/>
+            </key>
+            <one-to-many class="modelo.entidades.Ejemplar" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

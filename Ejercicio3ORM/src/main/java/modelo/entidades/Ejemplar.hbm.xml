@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 9 feb. 2021 10:03:19 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="ejercicioorm" dynamic-insert="false" dynamic-update="false" mutable="true" name="modelo.entidades.Ejemplar" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="ejemplar">
+        <id name="idEjemplar" type="int">
+            <column name="IdEjemplar"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="modelo.entidades.Libro" embed-xml="true" fetch="select" insert="true" name="libro" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column length="10" name="CodLibro"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="numEjemplar" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="NumEjemplar"/>
+        </property>
+        <property generated="never" lazy="false" name="estado" optimistic-lock="true" type="string" unique="false">
+            <column length="25" name="Estado"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="prestamosForIdUsuario" optimistic-lock="true" sort="unsorted" table="prestamo">
+            <key on-delete="noaction">
+                <column name="IdUsuario"/>
+            </key>
+            <one-to-many class="modelo.entidades.Prestamo" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="prestamosForIdEjemplar" optimistic-lock="true" sort="unsorted" table="prestamo">
+            <key on-delete="noaction">
+                <column name="IdEjemplar"/>
+            </key>
+            <one-to-many class="modelo.entidades.Prestamo" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>
