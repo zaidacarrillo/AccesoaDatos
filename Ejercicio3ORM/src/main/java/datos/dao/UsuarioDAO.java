@@ -1,14 +1,13 @@
 package datos.dao;
 
-import java.util.ArrayList;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import datos.configuracion.Conexion;
 import modelo.entidades.Autor;
+import modelo.entidades.Usuario;
 
-public class AutorDAO {
+public class UsuarioDAO {
 	
 	public void insertarAutor(Autor autor) {
 		Transaction t = null;
@@ -82,3 +81,4 @@ public class AutorDAO {
 		
 	}
 }
+
