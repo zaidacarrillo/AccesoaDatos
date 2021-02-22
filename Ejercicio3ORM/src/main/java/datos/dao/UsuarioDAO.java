@@ -9,11 +9,11 @@ import modelo.entidades.Usuario;
 
 public class UsuarioDAO {
 	
-	public void insertarAutor(Autor autor) {
+	public void insertarUsuario(Usuario usuario) {
 		Transaction t = null;
 		try(Session ses = Conexion.obtenerSesion()){
 			t = ses.beginTransaction();
-			ses.saveOrUpdate(autor);
+			ses.saveOrUpdate(usuario);
 			
 			t.commit();
 			
@@ -27,13 +27,13 @@ public class UsuarioDAO {
 	 * 
 	 * @param autor ha de ser un objeto persistente.
 	 */
-	public void modificarAutor(Autor autor) {
+	public void modificarUsuario(Usuario usuario) {
 		Transaction t = null;
 		try(Session ses = Conexion.obtenerSesion()){
 			t = ses.beginTransaction();
-			Autor autorPersistente = obtenerPorId(autor.getIdAutor());
-			if(autorPersistente != null) {
-				ses.update(autor);
+			Usuario usuarioPersistente = obtenerPorId(usuario.getIdUsuario());
+			if(usuarioPersistente != null) {
+				ses.update(usuario);
 				
 				System.out.println("Modificación completada.");
 				t.commit();
@@ -48,17 +48,17 @@ public class UsuarioDAO {
 			t.rollback();
 	}
 	
-	public void eliminar(Autor autor) {
+	public void eliminar(Usuario usuario) {
 		Transaction t = null;
 		try(Session ses = Conexion.obtenerSesion()){
 			t = ses.beginTransaction();
 			//Asegurar que está en estado persistido
 			//Si está detached con el merge está persistent
 			//Probar con saveOrUpdate para hacer siempre persistente el objeto
-			ses.merge(autor);
+			ses.merge(usuario);
 			
 			//Delete
-			ses.delete(autor);
+			ses.delete(usuario);
 			
 			t.commit();
 			
@@ -68,16 +68,16 @@ public class UsuarioDAO {
 			t.rollback();
 	}
 	
-	public Autor obtenerPorId(int idAutor) {
-		Autor autor = null;
+	public Usuario obtenerPorId(int idUsuario) {
+		Usuario usuario = null;
 		try(Session ses = Conexion.obtenerSesion()){
 			
-			autor = ses.get(Autor.class, idAutor);
+			usuario = ses.get(Usuario.class, idUsuario);
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		return autor;
+		return usuario;
 		
 	}
 }
