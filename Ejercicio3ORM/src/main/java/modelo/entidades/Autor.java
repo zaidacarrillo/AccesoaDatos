@@ -28,6 +28,13 @@ public class Autor implements java.io.Serializable {
 		this.libros = libros;
 	}
 
+	public Autor(int idAutor, String nombre, String apellidos) {
+		super();
+		this.idAutor = idAutor;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+	}
+
 	public int getIdAutor() {
 		return this.idAutor;
 	}
