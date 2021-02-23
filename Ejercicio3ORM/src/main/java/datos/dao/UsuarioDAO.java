@@ -16,11 +16,14 @@ public class UsuarioDAO {
 			ses.saveOrUpdate(usuario);
 			
 			t.commit();
+			System.out.println("Usuario insertado correctamente.");
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
 	/**
@@ -44,8 +47,10 @@ public class UsuarioDAO {
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
 	public void eliminar(Usuario usuario) {
@@ -55,17 +60,21 @@ public class UsuarioDAO {
 			//Asegurar que está en estado persistido
 			//Si está detached con el merge está persistent
 			//Probar con saveOrUpdate para hacer siempre persistente el objeto
-			ses.merge(usuario);
+//			if(!ses.contains(usuario))
+//				ses.merge(usuario);
 			
 			//Delete
+			ses.refresh(usuario);
 			ses.delete(usuario);
 			
 			t.commit();
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
 	public Usuario obtenerPorId(int idUsuario) {

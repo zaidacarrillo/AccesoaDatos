@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Generated 9 feb. 2021 10:03:19 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+<hibernate-mapping default-access="property"  default-lazy="true">
     <class catalog="ejercicioorm" dynamic-insert="false" dynamic-update="false" mutable="true" name="modelo.entidades.Usuario" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="usuario">
         <id name="idUsuario" type="int">
             <column name="IdUsuario"/>
-            <generator class="assigned"/>
+            <generator class="identity"/>
         </id>
         <property generated="never" lazy="false" name="nombre" optimistic-lock="true" type="string" unique="false">
             <column length="45" name="Nombre"/>
@@ -15,6 +15,14 @@
         <property generated="never" lazy="false" name="fechaNacimiento" optimistic-lock="true" type="date" unique="false">
             <column length="10" name="FechaNacimiento"/>
         </property>
-        <one-to-one class="modelo.entidades.Contactousuario" constrained="false" embed-xml="true" name="contactousuario"/>
+        <one-to-one class="modelo.entidades.Contactousuario" lazy="false" constrained="false" embed-xml="true" name="contactousuario" cascade="all"/>
+        
+        
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="prestamos" optimistic-lock="true" sort="unsorted" table="prestamo">
+            <key >
+                <column name="IdUsuario"/>
+            </key>
+            <one-to-many class="modelo.entidades.Prestamo" embed-xml="true" not-found="exception"/>
+        </set>
     </class>
 </hibernate-mapping>

@@ -15,13 +15,8 @@
         <property generated="never" lazy="false" name="estado" optimistic-lock="true" type="string" unique="false">
             <column length="25" name="Estado"/>
         </property>
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="prestamosForIdUsuario" optimistic-lock="true" sort="unsorted" table="prestamo">
-            <key on-delete="noaction">
-                <column name="IdUsuario"/>
-            </key>
-            <one-to-many class="modelo.entidades.Prestamo" embed-xml="true" not-found="exception"/>
-        </set>
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="prestamosForIdEjemplar" optimistic-lock="true" sort="unsorted" table="prestamo">
+      
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="prestamos" optimistic-lock="true" sort="unsorted" table="prestamo">
             <key on-delete="noaction">
                 <column name="IdEjemplar"/>
             </key>

@@ -13,8 +13,8 @@ public class Ejemplar implements java.io.Serializable {
 	private Libro libro;
 	private Integer numEjemplar;
 	private String estado;
-	private Set prestamosForIdUsuario = new HashSet(0);
-	private Set prestamosForIdEjemplar = new HashSet(0);
+	private Set prestamos = new HashSet(0);
+
 
 	public Ejemplar() {
 	}
@@ -23,14 +23,28 @@ public class Ejemplar implements java.io.Serializable {
 		this.idEjemplar = idEjemplar;
 	}
 
-	public Ejemplar(int idEjemplar, Libro libro, Integer numEjemplar, String estado, Set prestamosForIdUsuario,
-			Set prestamosForIdEjemplar) {
+	public Ejemplar(int idEjemplar, Integer numEjemplar, String estado) {
+		super();
+		this.idEjemplar = idEjemplar;
+		this.numEjemplar = numEjemplar;
+		this.estado = estado;
+	}
+
+	public Ejemplar(int idEjemplar, Libro libro, Integer numEjemplar, String estado) {
+		super();
 		this.idEjemplar = idEjemplar;
 		this.libro = libro;
 		this.numEjemplar = numEjemplar;
 		this.estado = estado;
-		this.prestamosForIdUsuario = prestamosForIdUsuario;
-		this.prestamosForIdEjemplar = prestamosForIdEjemplar;
+	}
+
+	public Ejemplar(int idEjemplar, Libro libro, Integer numEjemplar, String estado, Set prestamos
+			) {
+		this.idEjemplar = idEjemplar;
+		this.libro = libro;
+		this.numEjemplar = numEjemplar;
+		this.estado = estado;
+		this.prestamos = prestamos;
 	}
 
 	public int getIdEjemplar() {
@@ -65,20 +79,14 @@ public class Ejemplar implements java.io.Serializable {
 		this.estado = estado;
 	}
 
-	public Set getPrestamosForIdUsuario() {
-		return this.prestamosForIdUsuario;
+	public Set getPrestamos() {
+		return this.prestamos;
 	}
 
-	public void setPrestamosForIdUsuario(Set prestamosForIdUsuario) {
-		this.prestamosForIdUsuario = prestamosForIdUsuario;
+	public void setPrestamos(Set prestamos) {
+		this.prestamos = prestamos;
 	}
 
-	public Set getPrestamosForIdEjemplar() {
-		return this.prestamosForIdEjemplar;
-	}
-
-	public void setPrestamosForIdEjemplar(Set prestamosForIdEjemplar) {
-		this.prestamosForIdEjemplar = prestamosForIdEjemplar;
-	}
+	
 
 }

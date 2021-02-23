@@ -18,8 +18,9 @@ public class LibroDAO {
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
 	/**
@@ -43,28 +44,32 @@ public class LibroDAO {
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
-	public void eliminar(Autor autor) {
+	public void eliminar(Libro libro) {
 		Transaction t = null;
 		try(Session ses = Conexion.obtenerSesion()){
 			t = ses.beginTransaction();
 			//Asegurar que está en estado persistido
 			//Si está detached con el merge está persistent
 			//Probar con saveOrUpdate para hacer siempre persistente el objeto
-			ses.merge(autor);
+			ses.merge(libro);
 			
 			//Delete
-			ses.delete(autor);
+			ses.delete(libro);
 			
 			t.commit();
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
 	public Libro obtenerPorId(String codLibro) {

@@ -12,14 +12,16 @@ public class ContactoUsuarioDAO {
 		Transaction t = null;
 		try(Session ses = Conexion.obtenerSesion()){
 			t = ses.beginTransaction();
-			ses.saveOrUpdate(conUsuario);
+			ses.save(conUsuario);
 			
 			t.commit();
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
 	/**
@@ -43,8 +45,10 @@ public class ContactoUsuarioDAO {
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
 	public void eliminar(Contactousuario conUsuario) {
@@ -63,8 +67,10 @@ public class ContactoUsuarioDAO {
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
 	public Contactousuario obtenerPorId(int idconUsuario) {

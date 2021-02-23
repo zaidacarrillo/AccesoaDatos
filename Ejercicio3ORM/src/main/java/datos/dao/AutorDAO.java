@@ -20,8 +20,10 @@ public class AutorDAO {
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
 	/**
@@ -45,8 +47,10 @@ public class AutorDAO {
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
 	public void eliminar(Autor autor) {
@@ -65,8 +69,10 @@ public class AutorDAO {
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
 	public Autor obtenerPorId(int idAutor) {
