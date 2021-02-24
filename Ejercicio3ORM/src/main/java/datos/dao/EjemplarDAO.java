@@ -16,11 +16,13 @@ public class EjemplarDAO {
 			ses.saveOrUpdate(ejemplar);
 			
 			t.commit();
-			
+			System.out.println("Ejemplar insertado, correctamente.");
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
 	/**
@@ -45,8 +47,10 @@ public class EjemplarDAO {
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
 	public void eliminar(Ejemplar ejemplar) {
@@ -65,8 +69,10 @@ public class EjemplarDAO {
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
 	public Ejemplar obtenerPorId(int idEjemplar) {

@@ -12,9 +12,12 @@ public class ContactoUsuarioDAO {
 		Transaction t = null;
 		try(Session ses = Conexion.obtenerSesion()){
 			t = ses.beginTransaction();
+			//ses.refresh(conUsuario);
 			ses.save(conUsuario);
 			
 			t.commit();
+			
+			System.out.println("Contacto usuario insertado, correctamente.");
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();

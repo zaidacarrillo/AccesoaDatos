@@ -16,10 +16,14 @@ public class PrestamoDAO {
 			
 			t.commit();
 			
+			System.out.println("Prestamo insertado correctamente.");
+			
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
 	/**
@@ -34,8 +38,9 @@ public class PrestamoDAO {
 			if(prestamoPersistente != null) {
 				ses.update(prestamo);
 				
-				System.out.println("Modificación completada.");
+				
 				t.commit();
+				System.out.println("Modificación completada.");
 			}else {
 				System.out.println("El autor que quieres modificar no existe en base de datos");
 			
@@ -43,8 +48,10 @@ public class PrestamoDAO {
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
 	public void eliminar(Prestamo prestamo) {
@@ -54,7 +61,7 @@ public class PrestamoDAO {
 			//Asegurar que está en estado persistido
 			//Si está detached con el merge está persistent
 			//Probar con saveOrUpdate para hacer siempre persistente el objeto
-			ses.merge(prestamo);
+			//ses.merge(prestamo);
 			
 			//Delete
 			ses.delete(prestamo);
@@ -63,8 +70,10 @@ public class PrestamoDAO {
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
-		}if(t!=null)
-			t.rollback();
+			
+			if(t!=null)
+				t.rollback();
+		}
 	}
 	
 	public Prestamo obtenerPorId(int idPrestamo) {

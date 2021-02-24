@@ -18,7 +18,7 @@
         <one-to-one class="modelo.entidades.Contactousuario" lazy="false" constrained="false" embed-xml="true" name="contactousuario" cascade="all"/>
         
         
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="prestamos" optimistic-lock="true" sort="unsorted" table="prestamo">
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="prestamos" optimistic-lock="true" sort="unsorted" table="prestamo">
             <key >
                 <column name="IdUsuario"/>
             </key>

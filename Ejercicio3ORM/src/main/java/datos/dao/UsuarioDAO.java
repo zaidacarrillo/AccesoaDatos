@@ -13,6 +13,7 @@ public class UsuarioDAO {
 		Transaction t = null;
 		try(Session ses = Conexion.obtenerSesion()){
 			t = ses.beginTransaction();
+			//ses.refresh(usuario);
 			ses.saveOrUpdate(usuario);
 			
 			t.commit();
@@ -36,6 +37,7 @@ public class UsuarioDAO {
 			t = ses.beginTransaction();
 			Usuario usuarioPersistente = obtenerPorId(usuario.getIdUsuario());
 			if(usuarioPersistente != null) {
+				
 				ses.update(usuario);
 				
 				System.out.println("Modificación completada.");

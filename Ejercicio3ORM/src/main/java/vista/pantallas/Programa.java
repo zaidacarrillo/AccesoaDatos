@@ -1,6 +1,8 @@
 package vista.pantallas;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Set;
 
 import datos.dao.AutorDAO;
 import datos.dao.ContactoUsuarioDAO;
@@ -19,7 +21,7 @@ public class Programa {
 
 	public static void main(String[] args) {
 	/*
-		//Parte 7.1
+		//Relacion N:M
 			//insertar libro
 			LibroDAO ldao = new LibroDAO();
 			Libro l1 = new Libro("1b123fgh","Titulo_libro","Editorial", (float) 20);
@@ -36,7 +38,7 @@ public class Programa {
 			
 	*/
 	/*
-		//Parte 7.2
+		//Relacion 1:1 sin  existencia
 			//insertar ejemplar de libro
 			Libro l1 = new Libro("1FGJS23N","Los Pilares de la tierra", "Planeta", (float) 20);
 			EjemplarDAO edao = new EjemplarDAO();
@@ -48,7 +50,7 @@ public class Programa {
 			ldao2.eliminar(l1);
 	*/
 	/*
-		//Parte 7.3
+		//Relacion 1:1 con existencia
 			//insertar usuario 
 			Date fechaNacimiento = new Date(03/04/2001);
 			ContactoUsuarioDAO conuserdao = new ContactoUsuarioDAO();
@@ -62,7 +64,8 @@ public class Programa {
 			//Usé refresh para que deletee el usuario con el conctado dado que accede a la base de datos directamente para pillar el usuario con contacto.
 			userdao.eliminar(user);
 	 */
-		//Parte 7.4
+	/*
+		//Relacion N:M convertida en dos 1:N
 			//crear usuario
 			Date fechaNacimiento = new Date(16/9/2009);
 			Usuario user2 = new Usuario("Inaya","Carrillo", fechaNacimiento);
@@ -73,21 +76,41 @@ public class Programa {
 			userdao2.insertarUsuario(user2);
 			ContactoUsuarioDAO conuserdao2 = new ContactoUsuarioDAO();
 			//insertar contactousuario
+			conuser2.setUsuario(user2);
 			conuserdao2.insertarContactousuario(conuser2);
 			//creo libro
 			Date fechaPrestamo = new Date(20/5/2019);
 			Date fechaDevolucion = new Date(10/2/2020);
 			Libro l = new Libro("1SJKBCKS","Infiltrada", "Garceta", (float) 30);
+			LibroDAO ldao = new LibroDAO();
+			ldao.insertarLibro(l);
 			//para incluir a ejemplar
-			Ejemplar ejemplar = new Ejemplar(2,3,"RETIRADO");
-			ejemplar.setLibro(l);
+			Ejemplar ejemplar = new Ejemplar(2,l,3,"RETIRADO");
+			//ejemplar.setLibro(l);
+			EjemplarDAO ejemdao = new EjemplarDAO();
+			ejemdao.insertarEjemplar(ejemplar);
 			//creo prestamo
-			Prestamo p = new Prestamo(user2, ejemplar, fechaPrestamo,fechaDevolucion);
+			Prestamo p = new Prestamo(user2, ejemplar, fechaPrestamo,null);
 			PrestamoDAO prestamodao = new PrestamoDAO();
 			//inserto prestamo
 			prestamodao.insertarPrestamo(p);
 			//obtener prestamos
+			user2=userdao2.obtenerPorId(user2.getIdUsuario());
+			user2.getPrestamos();
+			Date fechaHoy = new java.sql.Date(new java.util.Date().getTime());
+			Set <Prestamo> listaprestamos_usuario =  user2.getPrestamos();
+			for(Prestamo u : listaprestamos_usuario)
+			{
+			if(u.getFechaDevolucion()== null) {
+				u.setFechaDevolucion(fechaHoy);
+				prestamodao.modificarPrestamo(u);
+			}else {
+				System.out.println("La fecha devolución ya estaba actualizada.");
+			}
 			
+			
+		}
+	*/
 			
 	}
 
