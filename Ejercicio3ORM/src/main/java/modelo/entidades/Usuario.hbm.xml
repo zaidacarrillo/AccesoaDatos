@@ -15,6 +15,9 @@
         <property generated="never" lazy="false" name="fechaNacimiento" optimistic-lock="true" type="date" unique="false">
             <column length="10" name="FechaNacimiento"/>
         </property>
+        <property generated="never" lazy="false" name="Dni" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="Dni"/>
+        </property>
         <one-to-one class="modelo.entidades.Contactousuario" lazy="false" constrained="false" embed-xml="true" name="contactousuario" cascade="all"/>
         
         

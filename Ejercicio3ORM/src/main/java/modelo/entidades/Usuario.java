@@ -15,6 +15,22 @@ public class Usuario implements java.io.Serializable {
 	private String apellidos;
 	private Date fechaNacimiento;
 	private Contactousuario contactousuario;
+	private String Dni;
+	public String getDni() {
+		return Dni;
+	}
+
+	public void setDni(String dni) {
+		Dni = dni;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellidos=" + apellidos
+				+ ", fechaNacimiento=" + fechaNacimiento + ", contactousuario=" + contactousuario + ", Dni=" + Dni
+				+ "]";
+	}
+
 	private Set prestamos = new HashSet(0);
 	
 	public Usuario() {
