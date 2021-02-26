@@ -6,12 +6,6 @@ package modelo.entidades;
  */
 public class Contactousuario implements java.io.Serializable {
 
-	@Override
-	public String toString() {
-		return "Contactousuario [idUsuario=" + idUsuario + ", email=" + email + ", telefonoMovil=" + telefonoMovil
-				+ ", telefonoFijo=" + telefonoFijo + "]";
-	}
-
 	private int idUsuario;
 	private Usuario usuario;
 	private String email;
@@ -77,6 +71,11 @@ public class Contactousuario implements java.io.Serializable {
 
 	public void setTelefonoFijo(String telefonoFijo) {
 		this.telefonoFijo = telefonoFijo;
+	}
+	@Override
+	public String toString() {
+		return "Contactousuario [idUsuario=" + idUsuario + ", email=" + email + ", telefonoMovil=" + telefonoMovil
+				+ ", telefonoFijo=" + telefonoFijo + "]";
 	}
 
 }

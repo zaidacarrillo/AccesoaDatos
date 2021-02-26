@@ -111,6 +111,16 @@ public class Programa {
 			
 		}
 	*/
+		UsuarioDAO pruebasQuery1 = new UsuarioDAO();
+		LibroDAO pruebasQuery2 = new LibroDAO();
+		
+	//	pruebasQuery1.ObtenerporDNI();
+		
+	//	pruebasQuery1.ObtenerUsuariosconLibrosPrestados();
+		
+		pruebasQuery1.ObtenerUsuariosMenoresdeEdad();
+				
+		
 			
 	}
 

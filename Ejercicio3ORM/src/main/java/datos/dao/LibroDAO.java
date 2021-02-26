@@ -106,10 +106,7 @@ public class LibroDAO {
 			System.out.println("Fecha 2: \n");
 			String userfecha2 = sc.nextLine();
 			Date fecha2 = sdf.parse(userfecha2);
-			//if(0<fecha1.compareTo(fecha2)){
-				
-			//} 
-			Query<Prestamo> q = sesion.createQuery("FROM Prestamo WHERE FechaPrestamo between :fecha1 and :fecha2");
+			Query<Prestamo> q = sesion.createQuery("FROM prestamo WHERE FechaPrestamo between :fecha1 and :fecha2");
 			q.setDate("fecha1", fecha1);
 			q.setDate("fecha2", fecha2);
 			List<Prestamo> listaPrestamos = q.getResultList();
@@ -123,80 +120,45 @@ public class LibroDAO {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-/*
-	@SuppressWarnings("unchecked")
-	public void librosPrestados() {
-		try (Session sesion = Conexion.obtenerSesion()) {
-			Scanner sc = new Scanner(System.in);
-			System.out.println("Indica dos fechas: \nFecha 1: \n");
-			String Sfecha1 = sc.nextLine();
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			Date fecha = sdf.parse(Sfecha1);
-			System.out.println("Fecha 2: \n");
-			String Sfecha2 = sc.nextLine();
-			Date fecha2 = sdf.parse(Sfecha2);
 
-			if (fecha.after(fecha2)) {
-				Date aux = fecha2;
-				fecha2 = fecha;
-				fecha = aux;
-			}
-
-			Query<Prestamo> q = sesion.createQuery("FROM Prestamo p WHERE p.FechaPrestamo between :fecha and :fecha2");
-			q.setDate("fecha", fecha);
-			q.setDate("fecha2", fecha2);
-			List<Prestamo> listaPrestamos = (List<Prestamo>) q.getResultList();
-
-			for (Prestamo p : listaPrestamos) {
-				Libro l = p.getEjemplar().getLibro();
-				System.out.println(l + "\n");
-			}
-			sc.close();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
 	}
-
-	@SuppressWarnings({ "unchecked" })
-	public void autorLibro() {
+	
+	public void ObtenerlibrosNombreAutor() {
+		Scanner sc = new Scanner(System.in);
 		try (Session sesion = Conexion.obtenerSesion()) {
-			Scanner sc = new Scanner(System.in);
-			System.out.println("Indica el nombre del autor");
-			String nombre = sc.nextLine();
-
-			Query<Autor> q = sesion.createQuery("FROM Autor WHERE nombre like :nombreAutor");
-			q.setParameter("nombreAutor", nombre);
-			List<Autor> listaAutores = (List<Autor>) q.getResultList();
-
-			for (Autor a : listaAutores) {
-				Set<Libro> listaLibros = a.getLibros();
+			System.out.println("Escribe el nombre del autor deseado: ");
+			String nombreAutor = sc.nextLine();
+			
+			Query<Autor> q = sesion.createQuery("FROM autor WHERE Nombre is LIKE :nombreAutor");
+			q.setParameter("nombreAutor", "nombreAutor");
+			List<Autor> listaAutores = q.getResultList();
+			
+			for(Autor a: listaAutores) {
+				Set <Libro> listaLibros = a.getLibros();
 				for (Libro l : listaLibros) {
 					System.out.println(l + "\n");
 				}
 			}
-			sc.close();
-		} catch (Exception ex) {
+
+		}catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
-
-	@SuppressWarnings({ "unchecked" })
-	public void precioLibro() {
+	
+	public void ObtenerLibroporPrecio() {
 		try (Session sesion = Conexion.obtenerSesion()) {
-			Query<Libro> q = sesion.createQuery("FROM Libro WHERE precio is null OR precio<20");
-			List<Libro> listaLibros = (List<Libro>) q.getResultList();
-
-			for (Libro l : listaLibros) {
-				System.out.println(l + "\n");
+			Query<Libro> q = sesion.createQuery("FROM libro WHERE Precio is Precio OR null");
+			
+			List <Libro> listaLibros = q.getResultList();
+			for(Libro l: listaLibros) {
+				System.out.println(l);
 			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
+			
+			
 		}
-		*/
-		
 	}
+	
+	
+	
 	
 }

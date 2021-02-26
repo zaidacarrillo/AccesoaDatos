@@ -134,7 +134,7 @@ public class UsuarioDAO {
 	
 	public void ObtenerUsuariosMenoresdeEdad() {
 		try(Session ses = Conexion.obtenerSesion()){
-			Query<Usuario> q = ses.createQuery("FROM Usuario WHERE current_date()-FechaNacimiento<18");
+			Query<Usuario> q = ses.createQuery("FROM usuario WHERE current_date()-FechaNacimiento<18");
 			List <Usuario> listaUsuariosMenores = q.getResultList();
 			for(Usuario u :listaUsuariosMenores) {
 				System.out.println(u);
