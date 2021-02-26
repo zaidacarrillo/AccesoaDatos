@@ -24,13 +24,7 @@ public class Usuario implements java.io.Serializable {
 		Dni = dni;
 	}
 
-	@Override
-	public String toString() {
-		return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellidos=" + apellidos
-				+ ", fechaNacimiento=" + fechaNacimiento + ", contactousuario=" + contactousuario + ", Dni=" + Dni
-				+ "]";
-	}
-
+	
 	private Set prestamos = new HashSet(0);
 	
 	public Usuario() {
@@ -104,5 +98,13 @@ public class Usuario implements java.io.Serializable {
 	public void setContactousuario(Contactousuario contactousuario) {
 		this.contactousuario = contactousuario;
 	}
+	
+	@Override
+	public String toString() {
+		return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellidos=" + apellidos
+				+ ", fechaNacimiento=" + fechaNacimiento + ", contactousuario=" + contactousuario + ", Dni=" + Dni
+				+ "]";
+	}
+
 
 }

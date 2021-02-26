@@ -20,6 +20,10 @@ import modelo.entidades.Usuario;
 public class Programa {
 
 	public static void main(String[] args) {
+		
+ /***
+  * Parte (7)
+  */
 	/*
 		//Relacion N:M
 			//insertar libro
@@ -111,6 +115,9 @@ public class Programa {
 			
 		}
 	*/
+   /**
+    * Parte Opcional (8)
+    */
 		UsuarioDAO pruebasQuery1 = new UsuarioDAO();
 		LibroDAO pruebasQuery2 = new LibroDAO();
 		
@@ -118,7 +125,13 @@ public class Programa {
 		
 	//	pruebasQuery1.ObtenerUsuariosconLibrosPrestados();
 		
-		pruebasQuery1.ObtenerUsuariosMenoresdeEdad();
+	//	pruebasQuery1.ObtenerUsuariosMenoresdeEdad();
+		
+	//	pruebasQuery2.ObtenerLibrosPrestamos();
+		
+	//	pruebasQuery2.ObtenerLibroporPrecio();
+		
+	//	pruebasQuery2.ObtenerlibrosNombreAutor();
 				
 		
 			

@@ -106,7 +106,7 @@ public class LibroDAO {
 			System.out.println("Fecha 2: \n");
 			String userfecha2 = sc.nextLine();
 			Date fecha2 = sdf.parse(userfecha2);
-			Query<Prestamo> q = sesion.createQuery("FROM prestamo WHERE FechaPrestamo between :fecha1 and :fecha2");
+			Query<Prestamo> q = sesion.createQuery("FROM Prestamo WHERE FechaPrestamo between :fecha1 and :fecha2");
 			q.setDate("fecha1", fecha1);
 			q.setDate("fecha2", fecha2);
 			List<Prestamo> listaPrestamos = q.getResultList();
@@ -129,8 +129,8 @@ public class LibroDAO {
 			System.out.println("Escribe el nombre del autor deseado: ");
 			String nombreAutor = sc.nextLine();
 			
-			Query<Autor> q = sesion.createQuery("FROM autor WHERE Nombre is LIKE :nombreAutor");
-			q.setParameter("nombreAutor", "nombreAutor");
+			Query<Autor> q = sesion.createQuery("FROM Autor WHERE Nombre like :nombreAutor");
+			q.setParameter("nombreAutor", nombreAutor);
 			List<Autor> listaAutores = q.getResultList();
 			
 			for(Autor a: listaAutores) {
@@ -147,7 +147,7 @@ public class LibroDAO {
 	
 	public void ObtenerLibroporPrecio() {
 		try (Session sesion = Conexion.obtenerSesion()) {
-			Query<Libro> q = sesion.createQuery("FROM libro WHERE Precio is Precio OR null");
+			Query<Libro> q = sesion.createQuery("FROM Libro WHERE Precio is null OR Precio<20");
 			
 			List <Libro> listaLibros = q.getResultList();
 			for(Libro l: listaLibros) {
